@@ -1,10 +1,10 @@
 # qr-l2-wireguard
-<span style="color:#d3d3d3">Quantum Resistant L2 WireGuard for Linux kernel</span>
+<span style="color:#d3d3d3">Quantum Resistant Layer 2 WireGuard for Linux kernel</span>
 
 ## How to build and run
   You must first replace this folder with drivers/net/wireguard. <br>
   The wireguard build procedure is the same as it was during the linux kernel build. <br>
-  The modification code compared to the original wireguard can be searched with L2_WIREGUARD and QR_WIREGUARD. <br>
+  The modification codes compared to the original wireguard can be searched with L2_WIREGUARD and QR_WIREGUARD string. <br>
 
 ```
 <main features>
@@ -12,10 +12,11 @@
  2) Quantum resistant wireguard using CRYSTALS Kyber KEM based on PQClean library.
  3) Original wireguard by Jason A. Donenfeld.
 ```
-## My blog posting for this project
+## My blog postings for this project
   For more information, please read the blog posting below.<br><br>
   https://slowbootkernelhacks.blogspot.com/2024/12/anatomy-of-layer-2-wireguard-vpn.html <br>
   https://slowbootkernelhacks.blogspot.com/2023/02/nanopi-r4s-pq-wireguard-vpn-router-part.html <br>
+  https://slowbootkernelhacks.blogspot.com/2024/05/nanopi-wireguard-go-quantum-safe-vpn.html <br>
   https://slowbootkernelhacks.blogspot.com/2020/09/wireguard-vpn.html <br>
   <br>
 
