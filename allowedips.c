@@ -384,18 +384,7 @@ struct wg_peer *l2wg_allowedips_lookup_dst(struct allowedips *table,
 		return lookup(table->root4, 32, &ip_hdr(skb)->daddr);
 	else if (skb->protocol == htons(ETH_P_IPV6))
 		return lookup(table->root6, 128, &ipv6_hdr(skb)->daddr);
-#if 0 /* test code - by chunghan.yi@gmail.com, 06/10/2024 -- */
-	printk("###(%s) before lookup() ...\n", __func__);
-	struct wg_peer *x;
-	x = lookup(table->root4, 32, &dummy);
-	if (x)
-		printk("###(%s) lookup() OK\n", __func__);
-	else
-		printk("###(%s) lookup() is failed.\n", __func__);
-	return x;
-#else
 	return lookup(table->root4, 32, &dummy);
-#endif
 }
 
 /* Returns a strong reference to a peer */

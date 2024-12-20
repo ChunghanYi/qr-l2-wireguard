@@ -157,9 +157,6 @@ static netdev_tx_t wg_xmit(struct sk_buff *skb, struct net_device *dev)
 	if (unlikely(!peer)) {
 		ret = -ENOKEY;
 		if (skb->protocol == htons(ETH_P_IP)) {
-#if 1 /* test code - by chunghan.yi@gmail.com, 06/10/2024 -- */
-			printk("### %s: No peer has allowed IPs matching %pI4\n", dev->name, &ip_hdr(skb)->daddr);
-#endif
 			net_dbg_ratelimited("%s: No peer has allowed IPs matching %pI4\n",
 					    dev->name, &ip_hdr(skb)->daddr);
 		}
@@ -167,9 +164,6 @@ static netdev_tx_t wg_xmit(struct sk_buff *skb, struct net_device *dev)
 			net_dbg_ratelimited("%s: No peer has allowed IPs matching %pI6\n",
 					    dev->name, &ipv6_hdr(skb)->daddr);
 		}
-#if 0 /* test code - by chunghan.yi@gmail.com, 06/10/2024 -- */
-		printk("### %s: [111] err_icmp\n", dev->name);
-#endif
 		goto err_icmp;
 	}
 
@@ -178,9 +172,6 @@ static netdev_tx_t wg_xmit(struct sk_buff *skb, struct net_device *dev)
 		ret = -EDESTADDRREQ;
 		net_dbg_ratelimited("%s: No valid endpoint has been configured or discovered for peer %llu\n",
 				    dev->name, peer->internal_id);
-#if 0 /* test code - by chunghan.yi@gmail.com, 06/10/2024 -- */
-		printk("### %s: [222] err_peer\n", dev->name);
-#endif
 		goto err_peer;
 	}
 
@@ -355,14 +346,6 @@ static void l2wg_setup(struct net_device *dev)
 	ether_setup(dev);
 	dev->needed_headroom = DATA_PACKET_HEAD_ROOM;
 	dev->needed_tailroom = noise_encrypted_len(MESSAGE_PADDING_MULTIPLE);
-#if 0 /* test code - by chunghan.yi@gmail.com, 06/13/2024 -- */
-	//dev->flags = IFF_BROADCAST | IFF_PROMISC | IFF_ALLMULTI ;
-
-	//stolen from drivers/net/tun.c
-	dev->priv_flags &= ~IFF_TX_SKB_SHARING;
-	dev->priv_flags |= IFF_LIVE_ADDR_CHANGE;
-	eth_hw_addr_random(dev);
-#endif
 	dev->priv_flags |= IFF_NO_QUEUE;
 	dev->features |= NETIF_F_LLTX;
 	dev->features |= WG_NETDEV_FEATURES;
